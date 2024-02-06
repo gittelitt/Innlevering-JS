@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Oppgave 2</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h2>Fartskontroll</h2>
+
+        Oppgi fart: <input type="number" id="fart">
+        <button type="button" id="registrer">Registrer</button>
+        <button type="button" id="visStatistikk">Vis statistikk</button>
+        <br><br>
+        Melding: <input type="text" id="melding" readonly>
+        <br><br>
+        Avvik:   <input type="text" id="avvik" readonly>
+        <br><br>
+        <p id="statistikk"></p>
+        <br><br>
+
+        <script>
+            console.clear();
+            var hastigheter = [];
+            var totalBot = 0;
+            var antallOvertredelser = 0;
+
+            document.getElementById("registrer").onclick = registrer;
+            document.getElementById("visStatistikk").onclick = visStatistikk;
+
+            function registrer() { //F/G
+                var fart = parseInt(document.getElementById("fart").value);
+                hastigheter.push(fart);
+                var fartsgrense = 80;
+                var avvik = fart - fartsgrense; // Oppgave B
+                var bot = 0;
+                var melding = "";
+                
+                // Oppgave A
+                if (fart <= fartsgrense) {
+                    melding = "Lovlig fart";
+                } else if (fart > fartsgrense && fart <= 90) {
+                    melding = "1500 kr i bot";
+                    bot = 1500;
+                    antallOvertredelser++; // Dette bidrar også til løsningen av Oppgave F
+                } else if (fart > 90) {
+                    melding = "3000 kr i bot";
+                    bot = 3000;
+                    antallOvertredelser++; // Dette bidrar også til løsningen av Oppgave F
+                }
+                
+                // Oppgave C
+                avvik = Math.abs(avvik);
+                
+                // Oppgave G
+                totalBot += bot;
+
+                document.getElementById("melding").value = melding;
+                document.getElementById("avvik").value = avvik + " km/t"; //Oppgave B
+            }
+            
+            function visStatistikk() {
+                // Oppgave D
+                var antallBiler = hastigheter.length;
+                // Oppgave E
+                var gjennomsnittFart = antallBiler > 0 ? (hastigheter.reduce((a, b) => a + b, 0) / antallBiler).toFixed(2) : 0;
+                
+                var statistikk = "Antall biler målt: " + antallBiler + "<br>" +
+                                 "Gjennomsnittsfart: " + gjennomsnittFart + " km/t<br>" +
+                                 "Antall fartsovertredelser: " + antallOvertredelser + "<br>" +
+                                 "Samlet bot: " + totalBot + " kr";
+                document.getElementById("statistikk").innerHTML = statistikk;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Oppgave 1</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <p id="meldingTekst"></p>
+    
+        <script>
+            var fart1 = 60;
+            var fart2 = 110;
+            
+            // A
+            var ledetekst = "Gjennomsnittsfarten er ";
+            var gjenomsnittsfart = (fart1 + fart2) / 2;
+            // B
+            var melding = ledetekst + gjenomsnittsfart + " km/t";
+            
+            console.log(melding);
+            alert(melding);
+            // C
+            if (fart1 <= 80) {
+                alert("Lovlig fart");
+            } else if (fart1 > 80 && fart1 <= 90) {
+                alert("1500 kr i bot");
+            } else {
+                alert("3000 kr i bot");
+            }
+            // D
+            var kunEnLovlig = (fart1 <= 80 && fart2 > 80) || (fart1 > 80 && fart2 <= 80);
+            alert(kunEnLovlig);
+            // E
+            
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
